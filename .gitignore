@@ -1,3 +1,4 @@
+
 /app/config/parameters.yml
 /build/
 /phpunit.xml
@@ -14,4 +15,10 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-.idea/
+/web/media/
+/web/uploads/
+node_modules/
+.vagrant/
+*.js.map
+.idea
+/app/config/routing_dev.yml

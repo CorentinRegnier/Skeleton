@@ -1,0 +1,14 @@
+parameters:
+    smart.host_env: dev
+    smart.project_domain: skeleton.sf
+    smart.project_url: https://skeleton.sf/
+    smart.project_name: skeleton
+    smart.project_title: skeleton
+    smart.vagrant_ip: 192.168.33.61
+    smart.email_sender_name: Skeleton
+    smart.developer_email: "%smart_developper_email%"
+    smart.contact_email: "%smart_contact_email%"
+
+smart_user:
+    model:
+        user_class: AppBundle\Entity\User
