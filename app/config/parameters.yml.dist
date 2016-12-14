@@ -13,7 +13,7 @@ parameters:
     mailer_transport:  smtp
     mailer_host:       smtp.gmail.com
     mailer_user:       corentin.regnier59@gmail.com
-    mailer_password:   ***
+    mailer_password:   ~
     mailer_port:       25
 
     # A secret key that's used to generate certain security-related tokens
