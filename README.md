@@ -14,3 +14,9 @@
 
 - go to http://skeleton.sf/app_dev.php/
 
+### Change name
+
+    1- parameters.yml.dist
+    2- smart.yml
+    3- build.xml
+    4- behat.yml
