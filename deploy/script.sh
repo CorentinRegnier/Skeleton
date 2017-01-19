@@ -14,11 +14,8 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password pas
 sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password $4"
 sudo apt-get -y install mysql-server
 
-sudo rm -rf /etc/mysql/my.cnf
-sudo mv /var/www/my.cnf /etc/mysql/my.cnf
-
-sudo chown root:root /etc/mysql/my.cnf
-sudo chmod 644 /etc/mysql/my.cnf
+sudo sed -i "s/3306/3360/" /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo sed -i "s/127.0.0.1/0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
 
 mysql -u root -p$4 -e "CREATE USER 'root'@'%' IDENTIFIED BY '$4'; GRANT ALL PRIVILEGES ON * . * TO 'root'@'%' IDENTIFIED BY '$4'; FLUSH PRIVILEGES;"
 
@@ -37,15 +34,16 @@ sudo rm /etc/phpmyadmin/config.inc.php
 sudo mv /var/www/config.inc.php /etc/phpmyadmin/config.inc.php
 sudo chmod 644 /etc/phpmyadmin/config.inc.php
 
-# Install PHP5
-sudo apt-get -y install php5 php5-mysql php5-cli php5-intl php5-xdebug php5-curl php5-gd php5-memcached php5-apcu php5-mcrypt
+# Install PHP7
+sudo apt-get -y install php php7.0-mysql php7.0-cli php7.0-intl php7.0-curl php7.0-gd php-apcu php7.0-mcrypt
 
-# Enable PHP5 mod
-sudo php5enmod mcrypt
+# Enable PHP7 mod
+sudo phpenmod mcrypt
 
-# Edit PHP5 Config
-sudo sed -i "s/post_max_size = 8M/post_max_size = 600M/" /etc/php5/apache2/php.ini
-sudo sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 500M/" /etc/php5/apache2/php.ini
+# Edit PHP7 Config
+sudo sed -i "s/post_max_size = 8M/post_max_size = 600M/" /etc/php/7.0/apache2/php.ini
+sudo sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 500M/" /etc/php/7.0/apache2/php.ini
+sudo sed -i "s/display_errors = Off/display_errors = On/" /etc/php/7.0/apache2/php.ini
 
 # Delete default Apache web directory and vhost
 sudo rm -rf /var/www/html
@@ -57,8 +55,8 @@ sudo mv /var/www/project.conf /etc/apache2/sites-available/
 sudo sed -i "s/project_url/$3/g" /etc/apache2/sites-available/project.conf
 
 # Edit Apache config
-sudo rm /etc/apache2/apache2.conf
-sudo mv /var/www/apache2.conf /etc/apache2/apache2.conf
+sudo sed -i "s/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=ubuntu/" /etc/apache2/envvars
+sudo sed -i "s/export APACHE_RUN_GROUP=www-data/export APACHE_RUN_GROUP=ubuntu/" /etc/apache2/envvars
 
 # Enable Apache mod and vhost
 sudo a2enmod rewrite
