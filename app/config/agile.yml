@@ -1,0 +1,14 @@
+parameters:
+    agile.host_env: dev
+    agile.project_domain: skeleton.sf
+    agile.project_url: https://skeleton.sf/
+    agile.project_name: skeleton
+    agile.project_title: skeleton
+    agile.vagrant_ip: 192.168.33.98
+    agile.email_sender_name: skeleton
+    agile.developer_email: "%agile_developer_email%"
+    agile.contact_email: "%agile_contact_email%"
+
+agile_user:
+    model:
+        user_class: AppBundle\Entity\User

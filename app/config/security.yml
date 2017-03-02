@@ -1,0 +1,28 @@
+# app/config/security.yml
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+    role_hierarchy:
+        ROLE_USER: ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_USER
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                csrf_token_generator: security.csrf.token_manager
+                success_handler: app.security.login_success_handler
+            logout: true
+            anonymous: true
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+    access_control:
+        - { path: ^/connection$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/inscription$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/mot-de-passe-perdu$, roles: IS_AUTHENTICATED_ANONYMOUSLY }

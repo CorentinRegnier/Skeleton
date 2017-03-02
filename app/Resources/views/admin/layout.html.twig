@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{% endblock %}
+{% block meta_description %}
+{% endblock %}
+{% block current_stylesheet %}
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+{% block container %}
+    <div class="content">
+
+        {# Template flash message #}
+        {% block flash_message %}
+            {% include 'admin/common/_flash.html.twig' %}
+        {% endblock %}
+
+        {# Block pour le contenu d'une vue #}
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block current_script %}
+    <script src="{{ asset('js/admin.min.js') }}"></script>
+{% endblock %}
